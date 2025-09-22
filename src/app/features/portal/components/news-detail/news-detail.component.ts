@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-news-detail',
   templateUrl: './news-detail.component.html',
   styleUrls: ['./news-detail.component.scss'],
+  standalone: false
 })
 export class NewsDetailComponent  implements OnInit {
 

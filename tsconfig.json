@@ -22,7 +22,8 @@
       "@app/*": ["src/app/*"],
     },
     "lib": [
-      "es2018", 
+      "es2018",
+      "ES2020.Promise",
       "dom"
     ],
     "useDefineForClassFields": false
