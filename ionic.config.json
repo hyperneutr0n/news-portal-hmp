@@ -1,0 +1,7 @@
+{
+  "name": "news-portal-hmp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
