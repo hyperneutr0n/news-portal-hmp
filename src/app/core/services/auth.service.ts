@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { User } from '../models/user.model';
-import { users } from "../data/user.data";
+import { User } from '@app/models/user.model';
+import { users } from "@app/data/user.data";
 
 @Injectable({
   providedIn: 'root'
