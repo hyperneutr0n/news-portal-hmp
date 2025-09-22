@@ -9,7 +9,7 @@ import { NewsDetailComponent } from './components/news-detail/news-detail.compon
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { NewsFavoritesComponent } from './components/news-favorites/news-favorites.component';
 import { NewsSearchComponent } from './components/news-search/news-search.component';
-
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +17,14 @@ import { NewsSearchComponent } from './components/news-search/news-search.compon
     NewsDetailComponent,
     CategoryListComponent,
     NewsFavoritesComponent,
-    NewsSearchComponent
+    NewsSearchComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
-    PortalRoutingModule
-  ]
+    PortalRoutingModule,
+  ],
 })
-export class PortalModule { }
+export class PortalModule {}

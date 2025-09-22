@@ -5,11 +5,12 @@ import { NewsDetailComponent } from './components/news-detail/news-detail.compon
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { NewsFavoritesComponent } from './components/news-favorites/news-favorites.component';
 import { NewsSearchComponent } from './components/news-search/news-search.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'news-list',
+    redirectTo: 'profile',
     pathMatch: 'full'
   },
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: NewsSearchComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 

@@ -30,8 +30,8 @@ export class AuthService {
     return this.storageService.getItem(this.currentUserKey);
   }
 
-  login(email: string, password: string): boolean {
-    const user = this.users.find(u => u.email === email && u.password === password);
+  login(username: string, password: string): boolean {
+    const user = this.users.find(u => u.username === username && u.password === password);
     if (user) {
       const { password, ...userToStore } = user;
       this.storageService.setItem(this.currentUserKey, userToStore);
@@ -45,21 +45,5 @@ export class AuthService {
     this.storageService.removeItem(this.currentUserKey);
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
-  }
-
-  addFavorite(newsId: number): void {
-    const user = this.getCurrentUser();
-    if (user && !user.favorites.includes(newsId)) {
-      user.favorites.push(newsId);
-      this.storageService.setItem(this.currentUserKey, user);
-    }
-  }
-
-  removeFavorite(newsId: number): void {
-    const user = this.getCurrentUser();
-    if (user) {
-      user.favorites = user.favorites.filter(id => id !== newsId);
-      this.storageService.setItem(this.currentUserKey, user);
-    }
   }
 }

@@ -1,0 +1,27 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login-container > div {
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  color: var(--ion-color-dark, #333);
+  
+  // Dark mode theming
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+  }
+}
+
+ion-card {
+  max-width: 400px;
+  width: 100%;
+}
