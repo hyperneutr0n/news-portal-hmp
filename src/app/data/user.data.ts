@@ -1,5 +1,19 @@
-import { User } from "src/app/models/user.model";
+import { User } from "@app/models/user.model";
 
 export const users: User[] = [
-  { id: 1, email: 'user@gmail.com', password: '123', favorites: [101, 103] }
+  {
+    id: 1,
+    username: 'randy',
+    password: '12345678',
+  },
+  {
+    id: 2,
+    username: 'gabriel',
+    password: '12345678',
+  },
+  {
+    id: 3,
+    username: 'darren',
+    password: '12345678',
+  },
 ];
