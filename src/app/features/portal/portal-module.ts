@@ -11,6 +11,7 @@ import { NewsFavoritesComponent } from './components/news-favorites/news-favorit
 import { NewsSearchComponent } from './components/news-search/news-search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
     NewsSearchComponent,
     ProfileComponent,
     TabsComponent,
+    DrawerComponent,
   ],
   imports: [
     CommonModule,
