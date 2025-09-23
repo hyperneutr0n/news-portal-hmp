@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 import { User } from '@models/user.model';
-import { users } from "@data/user.data";
+import { users } from '@data/user.data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private users: User[] = users;
@@ -15,13 +15,13 @@ export class AuthService {
 
   constructor(
     private storageService: StorageService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   isLoggedIn(): boolean {
     return !!this.storageService.getItem(this.currentUserKey);
   }
-  
+
   isLoggedIn$(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
@@ -31,7 +31,9 @@ export class AuthService {
   }
 
   login(username: string, password: string): boolean {
-    const user = this.users.find(u => u.username === username && u.password === password);
+    const user = this.users.find(
+      (u) => u.username === username && u.password === password,
+    );
     if (user) {
       const { password, ...userToStore } = user;
       this.storageService.setItem(this.currentUserKey, userToStore);

@@ -1,4 +1,4 @@
-import { NewsCategory } from "@models/news-category.model";
+import { NewsCategory } from '@models/news-category.model';
 
 export const newsCategories: NewsCategory[] = [
   // News 1 -> World
