@@ -6,36 +6,43 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { NewsFavoritesComponent } from './components/news-favorites/news-favorites.component';
 import { NewsSearchComponent } from './components/news-search/news-search.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'profile',
-    pathMatch: 'full'
-  },
-  {
-    path: 'news-list',
-    component: NewsListComponent
-  },
-  {
-    path: 'news-detail/:id',
-    component: NewsDetailComponent
-  },
-  {
-    path: 'categories',
-    component: CategoryListComponent
-  },
-  {
-    path: 'favorites',
-    component: NewsFavoritesComponent
-  },
-  {
-    path: 'search',
-    component: NewsSearchComponent
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent
+    component: TabsComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'categories',
+        pathMatch: 'full'
+      },
+      {
+        path: 'categories',
+        component: CategoryListComponent
+      },
+      {
+        path: 'news-list',
+        component: NewsListComponent
+      },
+      {
+        path: 'favorites',
+        component: NewsFavoritesComponent
+      },
+      {
+        path: 'search',
+        component: NewsSearchComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'news-detail/:id',
+        component: NewsDetailComponent
+      }
+    ]
   }
 ];
 

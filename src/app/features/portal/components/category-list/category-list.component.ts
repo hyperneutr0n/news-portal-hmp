@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
-  standalone: false
+  standalone: false,
 })
-export class CategoryListComponent  implements OnInit {
-
-  constructor() { }
+export class CategoryListComponent implements OnInit {
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
+  navigateToNewsList(category: string) {
+    this.router.navigate(['/portal/news-list'], { queryParams: { category } });
+  }
 }

@@ -1,3 +1,18 @@
-<p>
-  news-search works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search News</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Search News</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-searchbar placeholder="Search for news..."></ion-searchbar>
+    <p>Search results will appear here</p>
+  </div>
+</ion-content>

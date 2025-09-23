@@ -10,6 +10,7 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { NewsFavoritesComponent } from './components/news-favorites/news-favorites.component';
 import { NewsSearchComponent } from './components/news-search/news-search.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     NewsFavoritesComponent,
     NewsSearchComponent,
     ProfileComponent,
+    TabsComponent,
   ],
   imports: [
     CommonModule,

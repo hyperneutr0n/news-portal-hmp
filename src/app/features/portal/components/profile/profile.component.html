@@ -1,6 +1,28 @@
-<ion-card>
-  <ion-button (click)="logout()">
-    <ion-icon name="log-out-outline"></ion-icon>
-    Logout
-  </ion-button>
-</ion-card>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Account</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Account Settings</ion-card-title>
+        <ion-card-subtitle>Manage your account preferences</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button (click)="logout()" expand="block" color="danger">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Logout
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

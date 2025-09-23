@@ -1,3 +1,40 @@
-<p>
-  category-list works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <h2>News Categories</h2>
+    <p>Select a category to view related news articles:</p>
+
+    <!-- Category cards will go here -->
+    <ion-card button (click)="navigateToNewsList('technology')">
+      <ion-card-header>
+        <ion-card-title>Technology</ion-card-title>
+        <ion-card-subtitle>Latest tech news and innovations</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card button (click)="navigateToNewsList('science')">
+      <ion-card-header>
+        <ion-card-title>Science</ion-card-title>
+        <ion-card-subtitle>Scientific discoveries and research</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card button (click)="navigateToNewsList('world')">
+      <ion-card-header>
+        <ion-card-title>World</ion-card-title>
+        <ion-card-subtitle>Global news and events</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>
