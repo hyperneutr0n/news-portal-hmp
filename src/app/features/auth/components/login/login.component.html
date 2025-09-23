@@ -15,7 +15,7 @@
       <ion-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <ion-item>
-            <ion-input formControlName="username" type="text" placeholder="Email" fill="outline"></ion-input>
+            <ion-input formControlName="username" type="text" placeholder="Username" fill="outline"></ion-input>
           </ion-item>
           <ion-item>
             <ion-input formControlName="password" type="password" placeholder="Password" fill="outline">
@@ -25,6 +25,7 @@
           @if( errorMessage ) {
           <ion-text color="danger">{{ errorMessage }}</ion-text>
           }
+          <br>
           <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">
             Login
           </ion-button>
