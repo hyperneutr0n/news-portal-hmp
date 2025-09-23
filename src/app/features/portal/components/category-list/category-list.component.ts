@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { categories } from '@data/category.data';
+import { CategoryService } from "@services/category.service";
 
 @Component({
   selector: 'app-category-list',
@@ -9,10 +9,14 @@ import { categories } from '@data/category.data';
   standalone: false,
 })
 export class CategoryListComponent implements OnInit {
-  readonly categories = categories;
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router, 
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit() {}
+  
+  readonly categories = this.categoryService.getAllCategories();
 
   navigateToNewsList(category: string) {
     this.router.navigate(['/portal/news-list'], { queryParams: { category } });
