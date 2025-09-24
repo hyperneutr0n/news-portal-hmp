@@ -6,9 +6,11 @@ import { categories } from '@data/category.data';
   providedIn: 'root',
 })
 export class CategoryService {
-  private categories: Category[] = categories;
+  getCategoryId(name: string): number | undefined {
+    return categories.find(item => item.name.toLowerCase() === name.toLowerCase())?.id
+  }
 
   getAllCategories(): Category[] {
-    return this.categories;
+    return categories;
   }
 }

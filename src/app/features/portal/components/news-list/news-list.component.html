@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/portal/home"></ion-back-button>
+      </ion-buttons>
     </ion-buttons>
     <ion-title>Latest News</ion-title>
   </ion-toolbar>
@@ -15,6 +17,30 @@
   </ion-header>
 
   <div class="ion-padding">
-    <p>News list content will go here</p>
+    <!-- Show category not found message -->
+    @if (categoryNotFound) {
+      <ion-label>
+        <h2>Category not found</h2>
+        <p>The category "{{ category }}" does not exist.</p>
+      </ion-label>
+    }
+
+    <!-- Show news titles -->
+    @if (!categoryNotFound && news.length > 0) {
+      @for (item of news; track item.id) {
+        <app-news-card
+          [title]="item.title"
+          [preview]="item.preview"
+          [categories]="item.categoryName"
+        ></app-news-card>
+      }
+    }
+
+    <!-- Show no news message -->
+    @if (!categoryNotFound && news.length === 0) {
+      <ion-label>
+        <p>No news found for category "{{ category }}"</p>
+      </ion-label>
+    }
   </div>
 </ion-content>

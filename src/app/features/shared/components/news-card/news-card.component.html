@@ -1,3 +1,14 @@
-<p>
-  news-card works!
-</p>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title><b>{{ title }}</b></ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>{{ preview }}</p>
+    <div class="badge-container">
+      @for (category of categories; track category) {
+        <ion-badge color="primary">{{ category }}</ion-badge>
+      }
+    </div>
+  </ion-card-content>
+</ion-card>

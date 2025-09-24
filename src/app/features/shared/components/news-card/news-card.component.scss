@@ -1,0 +1,14 @@
+ion-card {
+    border-radius: 8px;
+}
+
+ion-card-content p {
+    margin-bottom: 1em;
+}
+
+.badge-container {
+    display: flex;
+    flex: row no-wrap;
+    gap: 0.5em;
+    justify-content: flex-start;
+}

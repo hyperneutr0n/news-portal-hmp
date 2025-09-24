@@ -12,6 +12,7 @@ import { NewsSearchComponent } from './components/news-search/news-search.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { SharedModule } from '@shared/shared-module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
     IonicModule,
     ReactiveFormsModule,
     PortalRoutingModule,
+    SharedModule,
   ],
 })
 export class PortalModule {}
