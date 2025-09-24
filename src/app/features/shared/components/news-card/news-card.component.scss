@@ -2,6 +2,12 @@ ion-card {
     border-radius: 8px;
 }
 
+ion-img {
+    width: auto;
+    height: 250px;
+    object-fit: cover;
+}
+
 ion-card-title {
     margin-bottom: 0.5em;
 }

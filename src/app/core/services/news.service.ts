@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
-import { categories } from '@data/category.data';
+import { CategoryService } from '@services/category.service';
+import { RatingService } from '@services/rating.service';
 import { newsCategories } from '@data/news-category.data';
 import { news } from '@data/news.data';
 
-export interface NewsWithCategory {
+export interface NewsList {
   id: number;
   title: string;
-  preview: string;
-  content: string;
-  categoryName: string[];
+  mainImgeUrl: string;
+  categoryNames: string[];
+  rating: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class NewsService {
-  getNewsByCategory(categoryID: number): NewsWithCategory[] {
+  constructor(
+    private categoryService: CategoryService,
+    private ratingService: RatingService,
+  ) {}
+
+  getNewsList(categoryID: number): NewsList[] {
     const newsIds = new Set(
       newsCategories
         .filter((item) => item.categoryId === categoryID)
@@ -25,22 +31,12 @@ export class NewsService {
     const filteredNews = news.filter((item) => newsIds.has(item.id));
 
     return filteredNews.map((newsItem) => {
-      // Get all category IDs for this news item
-      const categoryIds = newsCategories
-        .filter((nc) => nc.newsId === newsItem.id)
-        .map((nc) => nc.categoryId);
-
-      // Get category names for these IDs
-      const categoryNames = categories
-        .filter((cat) => categoryIds.includes(cat.id))
-        .map((cat) => cat.name);
-
       return {
         id: newsItem.id,
         title: newsItem.title,
-        preview: newsItem.preview,
-        content: newsItem.content,
-        categoryName: categoryNames,
+        mainImgeUrl: 'https://picsum.photos/400/300',
+        categoryNames: this.categoryService.getCategoriesNamesForNews(newsItem.id).map(cat => cat.name),
+        rating: this.ratingService.getAverageRatingForNews(newsItem.id),
       };
     });
   }

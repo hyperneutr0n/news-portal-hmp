@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '@services/category.service';
-import { NewsService, NewsWithCategory } from '@services/news.service';
+import { NewsService, NewsList } from '@services/news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -11,7 +11,7 @@ import { NewsService, NewsWithCategory } from '@services/news.service';
 })
 export class NewsListComponent implements OnInit {
   category: string = '';
-  news: NewsWithCategory[] = [];
+  news: NewsList[] = [];
   categoryNotFound: boolean = false;
 
   constructor(
@@ -36,7 +36,7 @@ export class NewsListComponent implements OnInit {
     const categoryId = this.categoryService.getCategoryId(this.category);
 
     if (categoryId) {
-      this.news = this.newsService.getNewsByCategory(categoryId);
+      this.news = this.newsService.getNewsList(categoryId);
       this.categoryNotFound = false;
     } else {
       this.categoryNotFound = true;
