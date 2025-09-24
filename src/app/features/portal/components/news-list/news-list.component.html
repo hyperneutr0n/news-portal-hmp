@@ -33,6 +33,7 @@
           [imageUrl]="item.mainImgeUrl"
           [categories]="item.categoryNames"
           [rating]="item.rating"
+          (click)="readNews(item.id)"
         ></app-news-card>
       }
     }

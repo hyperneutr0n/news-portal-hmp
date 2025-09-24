@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '@services/category.service';
 import { NewsService, NewsList } from '@services/news.service';
 
@@ -15,6 +15,7 @@ export class NewsListComponent implements OnInit {
   categoryNotFound: boolean = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
     private newsService: NewsService,
@@ -42,5 +43,9 @@ export class NewsListComponent implements OnInit {
       this.categoryNotFound = true;
       this.news = [];
     }
+  }
+
+  readNews(id: number) {
+    this.router.navigate(['/portal/news-detail', id]);
   }
 }
