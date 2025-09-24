@@ -13,6 +13,8 @@ export const newsCategories: NewsCategory[] = [
   { newsId: 8, categoryId: 5 },
   { newsId: 8, categoryId: 2 },
   { newsId: 9, categoryId: 4 },
+  { newsId: 10, categoryId: 1 },
+  { newsId: 10, categoryId: 2 },
   { newsId: 10, categoryId: 3 },
   { newsId: 10, categoryId: 5 },
   { newsId: 11, categoryId: 2 },

@@ -1,14 +1,26 @@
 <ion-card>
   <ion-card-header>
-    <ion-card-title><b>{{ title }}</b></ion-card-title>
+    <ion-img src="{{ imageUrl }}"></ion-img>
   </ion-card-header>
 
   <ion-card-content>
-    <p>{{ preview }}</p>
-    <div class="badge-container">
-      @for (category of categories; track category) {
-        <ion-badge color="primary">{{ category }}</ion-badge>
-      }
-    </div>
+    <ion-card-title>
+      <b>{{ title }}</b>
+    </ion-card-title>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-col class="badge-container" size="5">
+          @for (category of categories; track category) {
+            <ion-badge color="secondary">{{ category }}</ion-badge>
+          }
+        </ion-col>
+
+        <ion-col class="rating-container" size="1">
+          <p>{{ rating.toString() }}</p>
+          <ion-icon name="star" size="large" color="warning"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-content>
 </ion-card>

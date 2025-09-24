@@ -2,13 +2,34 @@ ion-card {
     border-radius: 8px;
 }
 
-ion-card-content p {
-    margin-bottom: 1em;
+ion-card-title {
+    margin-bottom: 0.5em;
+}
+
+ion-grid {
+    --ion-grid-columns: 6;
 }
 
 .badge-container {
     display: flex;
-    flex: row no-wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.5em;
     justify-content: flex-start;
+    align-items: center;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.rating-container p {
+    margin: 0;
+}
+
+.rating-container ion-icon {
+    padding-bottom: 4px;
 }

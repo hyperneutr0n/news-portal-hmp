@@ -7,9 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
   standalone: false,
 })
 export class NewsCardComponent implements OnInit {
+  @Input() imageUrl: string = '';
   @Input() title: string = '';
-  @Input() preview: string = '';  
   @Input() categories: string[] = [];
+  @Input() rating: number = 1.2;
 
   constructor() {}
 

@@ -30,7 +30,6 @@
       @for (item of news; track item.id) {
         <app-news-card
           [title]="item.title"
-          [preview]="item.preview"
           [categories]="item.categoryName"
         ></app-news-card>
       }
