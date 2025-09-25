@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'portal',
     loadChildren: () => import('./features/portal/portal-module').then(m => m.PortalModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'portal'
   }
 ];
 

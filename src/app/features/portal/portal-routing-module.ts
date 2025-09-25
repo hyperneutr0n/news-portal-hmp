@@ -39,8 +39,16 @@ const routes: Routes = [
         component: ProfileComponent
       },
       {
+        path: 'news-detail',
+        redirectTo: 'home'
+      },
+      {
         path: 'news-detail/:id',
         component: NewsDetailComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'home'
       }
     ]
   }
