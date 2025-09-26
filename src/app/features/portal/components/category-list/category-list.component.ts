@@ -19,6 +19,6 @@ export class CategoryListComponent implements OnInit {
   readonly categories = this.categoryService.getAllCategories();
 
   navigateToNewsList(category: string) {
-    this.router.navigate(['/portal/news-list'], { queryParams: { category } });
+    this.router.navigate(['/portal/news'], { queryParams: { category } });
   }
 }

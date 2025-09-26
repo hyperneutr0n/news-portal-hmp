@@ -12,7 +12,6 @@ import { NewsService, NewsList } from '@services/news.service';
 export class NewsListComponent implements OnInit {
   category: string = '';
   news: NewsList[] = [];
-  categoryNotFound: boolean = false;
 
   constructor(
     private router: Router,
@@ -30,7 +29,7 @@ export class NewsListComponent implements OnInit {
 
   private loadNews() {
     if (!this.category) {
-      this.categoryNotFound = true;
+      this.router.navigateByUrl('home');
       return;
     }
 
@@ -38,14 +37,13 @@ export class NewsListComponent implements OnInit {
 
     if (categoryId) {
       this.news = this.newsService.getNewsList(categoryId);
-      this.categoryNotFound = false;
     } else {
-      this.categoryNotFound = true;
-      this.news = [];
+      this.router.navigateByUrl('home');
+      return;
     }
   }
 
   readNews(id: number) {
-    this.router.navigate(['/portal/news-detail', id]);
+    this.router.navigate(['/portal/news', id]);
   }
 }

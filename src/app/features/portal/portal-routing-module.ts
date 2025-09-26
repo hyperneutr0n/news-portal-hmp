@@ -23,8 +23,16 @@ const routes: Routes = [
         component: CategoryListComponent
       },
       {
-        path: 'news-list',
+        path: 'category',
         component: NewsListComponent
+      },
+      {
+        path: 'news',
+        component: NewsListComponent
+      },
+      {
+        path: 'news/:id',
+        component: NewsDetailComponent
       },
       {
         path: 'favorites',
@@ -37,14 +45,6 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
-      },
-      {
-        path: 'news-detail',
-        redirectTo: 'home'
-      },
-      {
-        path: 'news-detail/:id',
-        component: NewsDetailComponent
       },
       {
         path: '**',

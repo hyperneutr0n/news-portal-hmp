@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button fill="clear" (click)="goBack()">
+      <ion-button (click)="goBack()" fill="clear">
         <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,6 +11,21 @@
 
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
-    <p>News detail content will go here</p>
+    <ion-img [src]="news.mainImageUrl"></ion-img>
+    <h1>
+      <b>{{ news.title }}</b>
+    </h1>
+    <p>{{ news.content }}</p>
+    <swiper-container [loop]="true">
+      <swiper-slide>
+        <img [src]="news.contentImageUrl[0]" />
+      </swiper-slide>
+      <swiper-slide>
+        <img [src]="news.contentImageUrl[1]" />
+      </swiper-slide>
+      <swiper-slide>
+        <img [src]="news.contentImageUrl[2]" />
+      </swiper-slide>
+    </swiper-container>
   </div>
 </ion-content>

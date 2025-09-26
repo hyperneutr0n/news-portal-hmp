@@ -17,32 +17,14 @@
   </ion-header>
 
   <div class="ion-padding">
-    <!-- Show category not found message -->
-    @if (categoryNotFound) {
-      <ion-label>
-        <h2>Category not found</h2>
-        <p>The category "{{ category }}" does not exist.</p>
-      </ion-label>
-    }
-
-    <!-- Show news titles -->
-    @if (!categoryNotFound && news.length > 0) {
-      @for (item of news; track item.id) {
-        <app-news-card
-          [title]="item.title"
-          [imageUrl]="item.mainImgeUrl"
-          [categories]="item.categoryNames"
-          [rating]="item.rating"
-          (click)="readNews(item.id)"
-        ></app-news-card>
-      }
-    }
-
-    <!-- Show no news message -->
-    @if (!categoryNotFound && news.length === 0) {
-      <ion-label>
-        <p>No news found for category "{{ category }}"</p>
-      </ion-label>
+    @for (item of news; track item.id) {
+      <app-news-card
+        [title]="item.title"
+        [imageUrl]="item.mainImgeUrl"
+        [categories]="item.categoryNames"
+        [rating]="item.rating"
+        (click)="readNews(item.id)"
+      ></app-news-card>
     }
   </div>
 </ion-content>
