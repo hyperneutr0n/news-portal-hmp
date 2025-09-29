@@ -3,7 +3,6 @@ import { CategoryService } from '@services/category.service';
 import { RatingService } from '@services/rating.service';
 import { newsCategories } from '@data/news-category.data';
 import { news } from '@data/news.data';
-import { News } from '../models/news.model';
 
 export interface NewsList {
   id: number;

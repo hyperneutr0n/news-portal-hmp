@@ -1,0 +1,39 @@
+<ion-item class="comment-item" lines="none">
+  <ion-label>
+    <div class="comment-content">
+      <span class="username">{{ comment.username }}</span>
+      <span class="text">{{ comment.content }}</span>
+    </div>
+    <div class="comment-actions">
+      <ion-button (click)="onReply()" fill="clear" size="small"
+        >Reply
+      </ion-button>
+    </div>
+  </ion-label>
+</ion-item>
+
+@if (comment.replies && comment.replies.length > 0) {
+  <ion-button
+    class="view-replies-btn"
+    (click)="toggleReplies()"
+    fill="clear"
+    size="small"
+  >
+    <div class="line"></div>
+    <span>{{
+      showReplies
+        ? 'Hide replies'
+        : 'View ' + comment.replies.length + ' replies'
+    }}</span>
+  </ion-button>
+
+  @if (showReplies) {
+    @for (reply of comment.replies; track comment.replies) {
+      <app-comment-item
+        [comment]="reply"
+        (replyClicked)="replyClicked.emit($event)"
+      >
+      </app-comment-item>
+    }
+  }
+}

@@ -1,0 +1,59 @@
+/* src/app/components/comment-item/comment-item.component.scss */
+
+:host {
+  width: 100%;
+}
+
+.comment-item {
+  align-items: flex-start;
+}
+
+.comment-content {
+  white-space: normal;
+  .username {
+    font-weight: 600;
+    margin-right: 6px;
+  }
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 0.8em;
+  color: var(--ion-color-medium-shade);
+
+  ion-button {
+    font-size: 1em;
+    font-weight: 600;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    height: 20px;
+    margin-left: 8px;
+    color: var(--ion-color-medium-shade);
+  }
+}
+
+.replies-section {
+  padding-left: 50px;
+}
+
+.view-replies-btn {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--ion-color-medium-shade);
+  --padding-start: 0;
+  --padding-end: 0;
+  text-transform: none;
+
+  .line {
+    width: 24px;
+    height: 1px;
+    background: var(--ion-color-step-300, #e0e0e0);
+    margin-right: 12px;
+  }
+}
+
+.replies-container {
+  padding-top: 8px;
+}
