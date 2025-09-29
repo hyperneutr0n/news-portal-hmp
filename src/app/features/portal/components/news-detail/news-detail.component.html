@@ -16,16 +16,120 @@
       <b>{{ news.title }}</b>
     </h1>
     <p>{{ news.content }}</p>
-    <swiper-container [loop]="true">
-      <swiper-slide>
-        <img [src]="news.contentImageUrl[0]" />
-      </swiper-slide>
-      <swiper-slide>
-        <img [src]="news.contentImageUrl[1]" />
-      </swiper-slide>
-      <swiper-slide>
-        <img [src]="news.contentImageUrl[2]" />
-      </swiper-slide>
-    </swiper-container>
+
+    @if (news.contentImageUrl && news.contentImageUrl.length > 0) {
+      <swiper-container [loop]="true" pagination="true" slidesPerView="1">
+        @for (imageUrl of news.contentImageUrl; track $index) {
+          <swiper-slide>
+            <ion-img
+              [src]="imageUrl"
+              [alt]="'News image ' + ($index + 1)"
+            ></ion-img>
+          </swiper-slide>
+        }
+      </swiper-container>
+    }
+
+    <div class="rating-section ion-margin-top">
+      <h3>Give your rating:</h3>
+      <div class="rating-stars">
+        @for (star of ratingStars; track star) {
+          <ion-icon
+            class="rating-star-clickable"
+            [name]="star <= userRating ? 'star' : 'star-outline'"
+            [color]="star <= userRating ? 'warning' : 'medium'"
+            (click)="onStarClick(star)"
+            size="large"
+          >
+          </ion-icon>
+        }
+      </div>
+      @if (userRating > 0) {
+        <p class="rating-text">
+          You rated: {{ userRating }} star{{ userRating !== 1 ? 's' : '' }}
+        </p>
+      }
+    </div>
+
+    <ion-button
+      class="ion-margin-top"
+      (click)="openCommentsModal()"
+      expand="block"
+      fill="outline"
+    >
+      <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
+      View Comments ({{ comments.length }})
+    </ion-button>
   </div>
 </ion-content>
+
+<ion-modal
+  #commentsModal
+  [isOpen]="isCommentsModalOpen"
+  [breakpoints]="[0, 1]"
+  [initialBreakpoint]="1"
+  (ionModalDidDismiss)="onModalDismiss()"
+>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Comments</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeCommentsModal()" fill="clear">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        @if (comments.length === 0) {
+          <ion-item>
+            <ion-label>
+              <p>No comments yet. Be the first to comment!</p>
+            </ion-label>
+          </ion-item>
+        } @else {
+          @for (comment of comments; track comment.id) {
+            <app-comment-item
+              [comment]="comment"
+              (replyClicked)="handleReply($event)"
+            >
+            </app-comment-item>
+          }
+        }
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      @if (replyingTo) {
+        <ion-item class="reply-indicator" lines="none">
+          <ion-chip color="primary">
+            <ion-label>Replying to {{ replyingTo.username }}</ion-label>
+            <ion-icon (click)="cancelReply()" name="close"></ion-icon>
+          </ion-chip>
+        </ion-item>
+      }
+      <ion-toolbar>
+        <ion-item lines="none">
+          <ion-input
+            class="ion-margin-end"
+            [(ngModel)]="newCommentText"
+            placeholder="Write a comment..."
+            fill="outline"
+            id="txtComment"
+          ></ion-input>
+
+          <ion-button
+            [disabled]="!newCommentText.trim()"
+            (click)="postComment()"
+            slot="end"
+          >
+            <ion-icon name="send" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>

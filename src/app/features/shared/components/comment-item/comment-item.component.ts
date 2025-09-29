@@ -8,13 +8,13 @@ import { DisplayComment } from '@services/comment.service';
   styleUrls: ['./comment-item.component.scss'],
   standalone: false,
 })
-export class CommentItemComponent  implements OnInit {
+export class CommentItemComponent implements OnInit {
   @Input() comment!: DisplayComment;
-  @Output() replyClicked = new EventEmitter<Comment>();
+  @Output() replyClicked = new EventEmitter<DisplayComment>();
 
   showReplies = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 

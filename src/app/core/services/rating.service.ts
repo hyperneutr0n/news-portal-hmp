@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Rating } from '@models/rating.model';
 import { ratings } from '@data/rating.data';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PortalRoutingModule } from './portal-routing-module';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewsDetailComponent } from './components/news-detail/news-detail.component';
@@ -28,6 +28,7 @@ import { SharedModule } from '@shared/shared-module';
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
+    FormsModule,
     PortalRoutingModule,
     SharedModule,
   ],

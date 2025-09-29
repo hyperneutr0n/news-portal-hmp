@@ -17,30 +17,28 @@ export class CommentService {
   getCommentForNews(newsId: number): DisplayComment[] {
     const filteredComments = comments.filter((comment) => comment.newsId === newsId);
     
-    return this.transformToNestedComments(comments);
+    return this.transformToNestedComments(filteredComments);
   }
 
   private transformToNestedComments(comments: Comment[]): DisplayComment[] {
     const commentMap: { [key: number]: DisplayComment } = {};
 
-    // First, map all comments to DisplayComment and add user details
     comments.forEach(comment => {
       const user = this.userService.getUsername(comment.userId);
       commentMap[comment.id] = {
         ...comment,
         username: user?.username || 'Unknown',
-        replies: [], // Initialize replies array
+        replies: [], 
       };
     });
 
     const nestedComments: DisplayComment[] = [];
-    // Second, link replies to their parents
     for (const commentId in commentMap) {
       const comment = commentMap[commentId];
       if (comment.parentCommentId && commentMap[comment.parentCommentId]) {
         commentMap[comment.parentCommentId].replies.push(comment);
       } else {
-        nestedComments.push(comment); // This is a top-level comment
+        nestedComments.push(comment);
       }
     }
     return nestedComments;
