@@ -18,7 +18,7 @@
     <p>{{ news.content }}</p>
 
     @if (news.contentImageUrl && news.contentImageUrl.length > 0) {
-      <swiper-container [modules]="swiperModules">
+      <swiper-container [modules]="swiperModules" init="false" #swiper>
         @for (imageUrl of news.contentImageUrl; track $index) {
           <swiper-slide>
             <ion-img

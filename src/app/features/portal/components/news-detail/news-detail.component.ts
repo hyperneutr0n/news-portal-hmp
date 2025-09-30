@@ -1,5 +1,5 @@
 import { IonicSlides } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { register } from 'swiper/element/bundle';
@@ -19,7 +19,7 @@ register();
   standalone: false,
 })
 export class NewsDetailComponent implements OnInit {
-  swiperModules = [IonicSlides]
+  swiperModules = [IonicSlides];
 
   news: NewsContent = {} as NewsContent;
   newsId: number = 0;
@@ -34,6 +34,8 @@ export class NewsDetailComponent implements OnInit {
 
   private currentUser!: number;
 
+  @ViewChild('swiper') swiper!: ElementRef<any>;
+
   constructor(
     private location: Location,
     private route: ActivatedRoute,
@@ -42,6 +44,16 @@ export class NewsDetailComponent implements OnInit {
     private authService: AuthService,
     private ratingService: RatingService,
   ) {}
+
+  ngAfterViewInit() {
+    const swiperParams = {
+      slidesPerView: 1,
+      pagination: { clickable: true },
+      loop: true,
+    };
+    Object.assign(this.swiper.nativeElement, swiperParams);
+    this.swiper.nativeElement.initialize();
+  }
 
   ngOnInit() {
     const currentUser = this.authService.getCurrentUser()?.id;
@@ -64,7 +76,10 @@ export class NewsDetailComponent implements OnInit {
   }
 
   private loadRating(newsId: number) {
-    const rating = this.ratingService.getRatingForNewsByUser(this.currentUser, newsId)
+    const rating = this.ratingService.getRatingForNewsByUser(
+      this.currentUser,
+      newsId,
+    );
     if (rating) {
       this.ratingMode = 'update';
       this.userRating = rating;
@@ -111,8 +126,12 @@ export class NewsDetailComponent implements OnInit {
       score: this.userRating,
     };
     switch (this.ratingMode) {
-      case 'post': this.ratingService.createNewRating(newRating); break;
-      case 'update': this.ratingService.updateRating(newRating); break;
+      case 'post':
+        this.ratingService.createNewRating(newRating);
+        break;
+      case 'update':
+        this.ratingService.updateRating(newRating);
+        break;
     }
   }
 
