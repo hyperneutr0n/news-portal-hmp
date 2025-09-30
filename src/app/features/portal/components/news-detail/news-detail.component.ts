@@ -152,6 +152,7 @@ export class NewsDetailComponent implements OnInit {
 
     this.commentService.createNewComment(newComment);
     this.newCommentText = '';
+    this.replyingTo = null;
     this.loadComments(this.newsId);
   }
 }
