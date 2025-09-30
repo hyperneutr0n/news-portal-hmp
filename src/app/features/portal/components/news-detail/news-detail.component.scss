@@ -76,3 +76,18 @@ swiper-slide ion-img {
   justify-content: center;
   align-content: center;
 }
+
+.favorite-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  h4 {
+    margin: 0;
+  }
+
+  ion-icon {
+    font-size: 2rem;
+  }
+}

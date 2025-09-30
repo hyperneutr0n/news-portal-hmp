@@ -5,10 +5,12 @@ import { Location } from '@angular/common';
 import { register } from 'swiper/element/bundle';
 import { Comment } from '@models/comments.model';
 import { Rating } from '@models/rating.model';
+import { Favorite } from '@models/favorite.model';
 import { NewsContent, NewsService } from '@services/news.service';
 import { DisplayComment, CommentService } from '@services/comment.service';
 import { AuthService } from '@services/auth.service';
 import { RatingService } from '@services/rating.service';
+import { FavoriteService } from '@services/favorite.service';
 
 register();
 
@@ -32,6 +34,7 @@ export class NewsDetailComponent implements OnInit {
   ratingStars: number[] = [1, 2, 3, 4, 5];
   ratingMode: 'post' | 'update' = 'post';
 
+  liked: boolean = false;
   private currentUser!: number;
 
   @ViewChild('swiper') swiper!: ElementRef<any>;
@@ -43,6 +46,7 @@ export class NewsDetailComponent implements OnInit {
     private commentService: CommentService,
     private authService: AuthService,
     private ratingService: RatingService,
+    private favoriteService: FavoriteService,
   ) {}
 
   ngAfterViewInit() {
@@ -68,6 +72,7 @@ export class NewsDetailComponent implements OnInit {
       this.news = this.newsService.getNewsContent(this.newsId);
       this.loadComments(this.newsId);
       this.loadRating(this.newsId);
+      this.liked = this.favoriteService.isNewsLiked(currentUser, this.newsId);
     });
   }
 
@@ -88,6 +93,44 @@ export class NewsDetailComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  onStarClick(rating: number) {
+    this.userRating = rating;
+    this.postRating();
+  }
+
+  private postRating() {
+    const newRating: Rating = {
+      userId: this.currentUser,
+      newsId: this.newsId,
+      score: this.userRating,
+    };
+    switch (this.ratingMode) {
+      case 'post':
+        this.ratingService.createNewRating(newRating);
+        break;
+      case 'update':
+        this.ratingService.updateRating(newRating);
+        break;
+    }
+  }
+
+  onHeartClick() {
+    this.liked = !this.liked;
+    this.postFavorite();
+  }
+
+  private postFavorite() {
+    if (this.liked) {
+      const favorite: Favorite = {
+        userId: this.currentUser,
+        newsId: this.newsId,
+      };
+      this.favoriteService.createFavorite(favorite);
+    } else {
+      this.favoriteService.deleteFavorite(this.newsId, this.currentUser);
+    }
   }
 
   handleReply(comment: DisplayComment) {
@@ -112,27 +155,6 @@ export class NewsDetailComponent implements OnInit {
   onModalDismiss() {
     this.isCommentsModalOpen = false;
     this.replyingTo = null;
-  }
-
-  onStarClick(rating: number) {
-    this.userRating = rating;
-    this.postRating();
-  }
-
-  private postRating() {
-    const newRating: Rating = {
-      userId: this.currentUser,
-      newsId: this.newsId,
-      score: this.userRating,
-    };
-    switch (this.ratingMode) {
-      case 'post':
-        this.ratingService.createNewRating(newRating);
-        break;
-      case 'update':
-        this.ratingService.updateRating(newRating);
-        break;
-    }
   }
 
   postComment() {

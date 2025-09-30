@@ -18,7 +18,7 @@
     <p>{{ news.content }}</p>
 
     @if (news.contentImageUrl && news.contentImageUrl.length > 0) {
-      <swiper-container [modules]="swiperModules" init="false" #swiper>
+      <swiper-container #swiper [modules]="swiperModules" init="false">
         @for (imageUrl of news.contentImageUrl; track $index) {
           <swiper-slide>
             <ion-img
@@ -49,6 +49,17 @@
           You rated: {{ userRating }} star{{ userRating !== 1 ? 's' : '' }}
         </p>
       }
+    </div>
+
+    <div class="favorite-section ion-margin-top">
+      <h4>Like this article? Save to favorite:</h4>
+      <ion-icon 
+      [name]="liked ? 'heart' : 'heart-outline'"  
+      [color]="liked ? 'danger' : 'medium'"
+      (click)="onHeartClick()"
+      size="large"
+      >
+    </ion-icon>
     </div>
 
     <ion-button
@@ -115,10 +126,10 @@
         <ion-item lines="none">
           <ion-input
             class="ion-margin-end"
+            id="txtComment"
             [(ngModel)]="newCommentText"
             placeholder="Write a comment..."
             fill="outline"
-            id="txtComment"
           ></ion-input>
 
           <ion-button
