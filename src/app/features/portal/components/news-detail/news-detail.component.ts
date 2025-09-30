@@ -1,12 +1,13 @@
+import { IonicSlides } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { register } from 'swiper/element/bundle';
-import { NewsContent, NewsService } from '@services/news.service';
 import { Comment } from '@models/comments.model';
+import { Rating } from '@models/rating.model';
+import { NewsContent, NewsService } from '@services/news.service';
 import { DisplayComment, CommentService } from '@services/comment.service';
 import { AuthService } from '@services/auth.service';
-import { UserService } from '@services/user.service';
 import { RatingService } from '@services/rating.service';
 
 register();
@@ -18,6 +19,8 @@ register();
   standalone: false,
 })
 export class NewsDetailComponent implements OnInit {
+  swiperModules = [IonicSlides]
+
   news: NewsContent = {} as NewsContent;
   newsId: number = 0;
   comments: DisplayComment[] = [];
@@ -25,9 +28,9 @@ export class NewsDetailComponent implements OnInit {
   replyingTo: DisplayComment | null = null;
   isCommentsModalOpen: boolean = false;
 
-  // Rating properties
   userRating: number = 0;
   ratingStars: number[] = [1, 2, 3, 4, 5];
+  ratingMode: 'post' | 'update' = 'post';
 
   private currentUser!: number;
 
@@ -37,7 +40,7 @@ export class NewsDetailComponent implements OnInit {
     private newsService: NewsService,
     private commentService: CommentService,
     private authService: AuthService,
-    private userService: UserService,
+    private ratingService: RatingService,
   ) {}
 
   ngOnInit() {
@@ -47,14 +50,25 @@ export class NewsDetailComponent implements OnInit {
     }
     this.currentUser = currentUser;
 
-    const newsId = this.route.snapshot.paramMap.get('id');
-    if (!newsId) {
-      return;
+    this.route.params.subscribe((params) => {
+      this.newsId = parseInt(params['id']);
+
+      this.news = this.newsService.getNewsContent(this.newsId);
+      this.loadComments(this.newsId);
+      this.loadRating(this.newsId);
+    });
+  }
+
+  private loadComments(newsId: number) {
+    this.comments = this.commentService.getCommentForNews(newsId);
+  }
+
+  private loadRating(newsId: number) {
+    const rating = this.ratingService.getRatingForNewsByUser(this.currentUser, newsId)
+    if (rating) {
+      this.ratingMode = 'update';
+      this.userRating = rating;
     }
-    this.newsId = parseInt(newsId);
-    this.news = this.newsService.getNewsContent(this.newsId);
-    this.comments = this.commentService.getCommentForNews(this.newsId);
-    console.log(this.comments);
   }
 
   goBack() {
@@ -63,7 +77,7 @@ export class NewsDetailComponent implements OnInit {
 
   handleReply(comment: DisplayComment) {
     this.replyingTo = comment;
-    document.getElementById("txtComment")?.focus();
+    document.getElementById('txtComment')?.focus();
   }
 
   cancelReply() {
@@ -72,12 +86,12 @@ export class NewsDetailComponent implements OnInit {
 
   openCommentsModal() {
     this.isCommentsModalOpen = true;
-    document.getElementById("txtComment")?.focus();
+    document.getElementById('txtComment')?.focus();
   }
 
   closeCommentsModal() {
     this.isCommentsModalOpen = false;
-    this.replyingTo = null; 
+    this.replyingTo = null;
   }
 
   onModalDismiss() {
@@ -87,18 +101,23 @@ export class NewsDetailComponent implements OnInit {
 
   onStarClick(rating: number) {
     this.userRating = rating;
+    this.postRating();
   }
 
-  clearRating() {
-    this.userRating = 0;
+  private postRating() {
+    const newRating: Rating = {
+      userId: this.currentUser,
+      newsId: this.newsId,
+      score: this.userRating,
+    };
+    switch (this.ratingMode) {
+      case 'post': this.ratingService.createNewRating(newRating); break;
+      case 'update': this.ratingService.updateRating(newRating); break;
+    }
   }
 
   postComment() {
     if (!this.newCommentText.trim()) return;
-
-    const user = this.userService.getUsername(this.currentUser);
-
-    if (!user) return;
 
     const newComment: Comment = {
       id: Date.now(),
@@ -109,21 +128,11 @@ export class NewsDetailComponent implements OnInit {
     };
 
     if (this.replyingTo) {
-      newComment.content = `@${this.replyingTo.username} ${newComment.content}`
+      newComment.content = `@${this.replyingTo.username} ${newComment.content}`;
     }
 
-    const newDisplayComment: DisplayComment = {
-      ...newComment,
-      username: user.username,
-      replies: [],
-    };
-
-    if (this.replyingTo) {
-      this.replyingTo.replies.push(newDisplayComment);
-      this.replyingTo = null;
-    } else {
-      this.comments.push(newDisplayComment);
-    }
+    this.commentService.createNewComment(newComment);
     this.newCommentText = '';
+    this.loadComments(this.newsId);
   }
 }
