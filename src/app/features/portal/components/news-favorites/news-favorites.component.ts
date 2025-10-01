@@ -20,7 +20,6 @@ export class NewsFavoritesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('news favorites onInit');
     const currentUser = this.authService.getCurrentUser()?.id;
     if (!currentUser) {
       return;
