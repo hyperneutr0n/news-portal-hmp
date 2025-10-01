@@ -42,6 +42,10 @@ export class FavoriteService {
     }
 
     this.favorites.splice(favoriteIndex, 1);
-    this.storageService.setItem('favorites', this.favorites)
+    this.storageService.setItem('favorites', this.favorites);
+  }
+
+  getFavoritesByUser(userId: number): Favorite[] {
+    return this.favorites.filter((item) => item.userId === userId);
   }
 }

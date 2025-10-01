@@ -10,7 +10,21 @@
 <ion-content [fullscreen]="true">
   <div class="content-wrapper">
     <div class="header-section">
-      <ion-searchbar placeholder="Search for news..."></ion-searchbar>
+      <ion-searchbar
+        showClearButton="focus"
+        placeholder="Search for news..."
+        (ionInput)="onSearchChange($event)"
+      >
+      </ion-searchbar>
     </div>
+    @for (news of newsResults; track news.id) {
+      <app-news-card
+        [title]="news.title"
+        [imageUrl]="news.mainImgeUrl"
+        [categories]="news.categoryNames"
+        [rating]="news.rating"
+        (click)="readNews(news.id)"
+      ></app-news-card>
+    }
   </div>
 </ion-content>
