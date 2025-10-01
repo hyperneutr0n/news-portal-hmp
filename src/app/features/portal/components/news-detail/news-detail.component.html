@@ -15,6 +15,7 @@
     <h1>
       <b>{{ news.title }}</b>
     </h1>
+    <ion-card-subtitle>Viewed {{ news.viewed }} times</ion-card-subtitle>
     <p>{{ news.content }}</p>
 
     @if (news.contentImageUrl && news.contentImageUrl.length > 0) {

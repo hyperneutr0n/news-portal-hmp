@@ -3,6 +3,7 @@ import { News } from '@models/news.model';
 import { CategoryService } from '@services/category.service';
 import { RatingService } from '@services/rating.service';
 import { FavoriteService } from '@services/favorite.service';
+import { StorageService } from '@services/storage.service';
 import { news } from '@data/news.data';
 import { newsCategories } from '@data/news-category.data';
 
@@ -20,17 +21,31 @@ export interface NewsContent {
   mainImageUrl: string;
   content: string;
   contentImageUrl: string[];
+  viewed: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class NewsService {
+  private news: News[] = [];
+
   constructor(
+    private storageService: StorageService,
     private categoryService: CategoryService,
     private ratingService: RatingService,
     private favoriteService: FavoriteService,
-  ) {}
+  ) {
+    this.loadNews();
+  }
+
+  private loadNews(): void {
+    this.news = this.storageService.getItem('news');
+    if (!this.news) {
+      this.news = news;
+      this.storageService.setItem('news', news);
+    }
+  }
 
   getNewsList(categoryId: number): NewsList[] {
     const newsIds = new Set(
@@ -39,13 +54,13 @@ export class NewsService {
         .map((item) => item.newsId),
     );
 
-    const filteredNews = news.filter((item) => newsIds.has(item.id));
+    const filteredNews = this.news.filter((item) => newsIds.has(item.id));
 
     return this.filteredNewsMapper(filteredNews);
   }
 
   getNewsContent(newsId: number): NewsContent {
-    const readNews = news.find((item) => item.id === newsId);
+    const readNews = this.news.find((item) => item.id === newsId);
 
     if (!readNews) {
       return {} as NewsContent;
@@ -61,11 +76,12 @@ export class NewsService {
         'https://picsum.photos/400/300',
         'https://picsum.photos/400/300',
       ],
+      viewed: readNews.viewed,
     };
   }
 
   searchNews(query: string): NewsList[] {
-    const filteredNews = news.filter((item) =>
+    const filteredNews = this.news.filter((item) =>
       item.title.toLowerCase().includes(query.toLowerCase()),
     );
 
@@ -76,7 +92,7 @@ export class NewsService {
     const favoriteNews = this.favoriteService.getFavoritesByUser(userId);
     const newsIds = new Set(favoriteNews.map((item) => item.newsId));
 
-    const filteredNews = news.filter((item) => newsIds.has(item.id));
+    const filteredNews = this.news.filter((item) => newsIds.has(item.id));
 
     return this.filteredNewsMapper(filteredNews);
   }
@@ -93,5 +109,11 @@ export class NewsService {
         rating: this.ratingService.getAverageRatingForNews(newsItem.id),
       };
     });
+  }
+
+  readNews(newsId: number) {
+    const viewedNews = this.news.findIndex((item) => item.id === newsId);
+    this.news[viewedNews].viewed++;
+    this.storageService.setItem('news', this.news);
   }
 }

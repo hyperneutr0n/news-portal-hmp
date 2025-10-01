@@ -44,6 +44,7 @@ export class NewsListComponent implements OnInit {
   }
 
   readNews(id: number) {
+    this.newsService.readNews(id);
     this.router.navigate(['/portal/news', id]);
   }
 }

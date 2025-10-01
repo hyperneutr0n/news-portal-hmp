@@ -49,16 +49,6 @@ export class NewsDetailComponent implements OnInit {
     private favoriteService: FavoriteService,
   ) {}
 
-  ngAfterViewInit() {
-    const swiperParams = {
-      slidesPerView: 1,
-      pagination: { clickable: true },
-      loop: true,
-    };
-    Object.assign(this.swiper.nativeElement, swiperParams);
-    this.swiper.nativeElement.initialize();
-  }
-
   ngOnInit() {
     const currentUser = this.authService.getCurrentUser()?.id;
     if (!currentUser) {
@@ -74,6 +64,17 @@ export class NewsDetailComponent implements OnInit {
       this.loadRating(this.newsId);
       this.liked = this.favoriteService.isNewsLiked(currentUser, this.newsId);
     });
+  }
+
+  ionViewDidEnter() {
+    const swiperParams = {
+      slidesPerView: 1,
+      navigation: true,
+      pagination: { clickable: true },
+      loop: true,
+    };
+    Object.assign(this.swiper.nativeElement, swiperParams);
+    this.swiper.nativeElement.initialize();
   }
 
   private loadComments(newsId: number) {
