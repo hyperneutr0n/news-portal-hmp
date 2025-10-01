@@ -9,8 +9,8 @@ describe('NewsFavoritesComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewsFavoritesComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [NewsFavoritesComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewsFavoritesComponent);

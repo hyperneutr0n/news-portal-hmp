@@ -1,5 +1,5 @@
 export interface Rating {
-    userId: number;
-    newsId: number;
-    score: number;
+  userId: number;
+  newsId: number;
+  score: number;
 }

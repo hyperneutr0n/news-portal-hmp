@@ -1,4 +1,4 @@
 export interface NewsCategory {
-    newsId: number;
-    categoryId: number;
+  newsId: number;
+  categoryId: number;
 }

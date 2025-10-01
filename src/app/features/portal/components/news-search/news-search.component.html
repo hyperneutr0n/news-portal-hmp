@@ -11,9 +11,9 @@
   <div class="content-wrapper">
     <div class="header-section">
       <ion-searchbar
+        (ionInput)="onSearchChange($event)"
         showClearButton="focus"
         placeholder="Search for news..."
-        (ionInput)="onSearchChange($event)"
       >
       </ion-searchbar>
     </div>

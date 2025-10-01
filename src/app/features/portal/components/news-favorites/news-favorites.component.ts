@@ -10,7 +10,7 @@ import { AuthService } from '@services/auth.service';
   standalone: false,
 })
 export class NewsFavoritesComponent implements OnInit {
-  private currentUser !: number;
+  private currentUser!: number;
   favoriteNews: NewsList[] = [];
 
   constructor(

@@ -15,7 +15,7 @@
   </ion-header>
 
   <div class="ion-padding">
-    @for(news of favoriteNews; track news.id) {
+    @for (news of favoriteNews; track news.id) {
       <app-news-card
         [title]="news.title"
         [imageUrl]="news.mainImgeUrl"

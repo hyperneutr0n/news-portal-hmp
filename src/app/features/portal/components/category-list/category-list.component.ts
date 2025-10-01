@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryService } from "@services/category.service";
+import { CategoryService } from '@services/category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -10,12 +10,12 @@ import { CategoryService } from "@services/category.service";
 })
 export class CategoryListComponent implements OnInit {
   constructor(
-    private router: Router, 
-    private categoryService: CategoryService
+    private router: Router,
+    private categoryService: CategoryService,
   ) {}
 
   ngOnInit() {}
-  
+
   readonly categories = this.categoryService.getAllCategories();
 
   navigateToNewsList(category: string) {

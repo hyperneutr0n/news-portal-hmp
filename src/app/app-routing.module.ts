@@ -6,27 +6,29 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'portal',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)
+    loadChildren: () =>
+      import('./features/auth/auth-module').then((m) => m.AuthModule),
   },
   {
     path: 'portal',
-    loadChildren: () => import('./features/portal/portal-module').then(m => m.PortalModule),
-    canActivate: [AuthGuard]
+    loadChildren: () =>
+      import('./features/portal/portal-module').then((m) => m.PortalModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
-    redirectTo: 'portal'
-  }
+    redirectTo: 'portal',
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

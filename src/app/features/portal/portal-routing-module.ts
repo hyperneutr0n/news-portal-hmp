@@ -16,46 +16,46 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home',
-        component: CategoryListComponent
+        component: CategoryListComponent,
       },
       {
         path: 'category',
-        component: NewsListComponent
+        component: NewsListComponent,
       },
       {
         path: 'news',
-        component: NewsListComponent
+        component: NewsListComponent,
       },
       {
         path: 'news/:id',
-        component: NewsDetailComponent
+        component: NewsDetailComponent,
       },
       {
         path: 'favorites',
-        component: NewsFavoritesComponent
+        component: NewsFavoritesComponent,
       },
       {
         path: 'search',
-        component: NewsSearchComponent
+        component: NewsSearchComponent,
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
       },
       {
         path: '**',
-        redirectTo: 'home'
-      }
-    ]
-  }
+        redirectTo: 'home',
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PortalRoutingModule { }
+export class PortalRoutingModule {}

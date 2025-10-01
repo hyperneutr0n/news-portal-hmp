@@ -9,8 +9,8 @@ describe('NewsSearchComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewsSearchComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [NewsSearchComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewsSearchComponent);

@@ -9,8 +9,8 @@ describe('DrawerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DrawerComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [DrawerComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DrawerComponent);

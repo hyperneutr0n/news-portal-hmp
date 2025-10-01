@@ -1,41 +1,41 @@
 ion-card {
-    border-radius: 8px;
+  border-radius: 8px;
 }
 
 ion-img {
-    width: auto;
-    height: 250px;
-    object-fit: cover;
+  width: auto;
+  height: 250px;
+  object-fit: cover;
 }
 
 ion-card-title {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 ion-grid {
-    --ion-grid-columns: 6;
+  --ion-grid-columns: 6;
 }
 
 .badge-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5em;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .rating-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 2px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
 }
 
 .rating-container p {
-    margin: 0;
+  margin: 0;
 }
 
 .rating-container ion-icon {
-    padding-bottom: 4px;
+  padding-bottom: 4px;
 }
