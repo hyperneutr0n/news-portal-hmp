@@ -15,14 +15,13 @@
   </ion-header>
 
   <div class="ion-padding">
-    @for (news of favoriteNews; track news.id) {
-      <app-news-card
-        [title]="news.title"
-        [imageUrl]="news.mainImgeUrl"
-        [categories]="news.categoryNames"
-        [rating]="news.rating"
-        (click)="readNews(news.id)"
-      ></app-news-card>
-    }
+    <app-news-card
+      *ngFor="let news of favoriteNews"
+      [title]="news.title"
+      [imageUrl]="news.mainImgeUrl"
+      [categories]="news.categoryNames"
+      [rating]="news.rating"
+      (click)="readNews(news.id)"
+    ></app-news-card>
   </div>
 </ion-content>

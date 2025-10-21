@@ -18,38 +18,35 @@
     <ion-card-subtitle>Viewed {{ news.viewed }} times</ion-card-subtitle>
     <p>{{ news.content }}</p>
 
-    @if (news.contentImageUrl && news.contentImageUrl.length > 0) {
-      <swiper-container #swiper [modules]="swiperModules" init="false">
-        @for (imageUrl of news.contentImageUrl; track $index) {
-          <swiper-slide>
-            <ion-img
-              [src]="imageUrl"
-              [alt]="'News image ' + ($index + 1)"
-            ></ion-img>
-          </swiper-slide>
-        }
-      </swiper-container>
-    }
+    <swiper-container
+      #swiper
+      *ngIf="news.contentImageUrl && news.contentImageUrl.length > 0"
+      [modules]="swiperModules"
+      init="false"
+    >
+      <swiper-slide
+        *ngFor="let imageUrl of news.contentImageUrl; let i = index"
+      >
+        <ion-img [src]="imageUrl" [alt]="'News image ' + (i + 1)"></ion-img>
+      </swiper-slide>
+    </swiper-container>
 
     <div class="rating-section ion-margin-top">
       <h3>Give your rating:</h3>
       <div class="rating-stars">
-        @for (star of ratingStars; track star) {
-          <ion-icon
-            class="rating-star-clickable"
-            [name]="star <= userRating ? 'star' : 'star-outline'"
-            [color]="star <= userRating ? 'warning' : 'medium'"
-            (click)="onStarClick(star)"
-            size="large"
-          >
-          </ion-icon>
-        }
+        <ion-icon
+          class="rating-star-clickable"
+          *ngFor="let star of ratingStars"
+          [name]="star <= userRating ? 'star' : 'star-outline'"
+          [color]="star <= userRating ? 'warning' : 'medium'"
+          (click)="onStarClick(star)"
+          size="large"
+        >
+        </ion-icon>
       </div>
-      @if (userRating > 0) {
-        <p class="rating-text">
-          You rated: {{ userRating }} star{{ userRating !== 1 ? 's' : '' }}
-        </p>
-      }
+      <p class="rating-text" *ngIf="userRating > 0">
+        You rated: {{ userRating }} star{{ userRating !== 1 ? 's' : '' }}
+      </p>
     </div>
 
     <div class="favorite-section ion-margin-top">
@@ -96,33 +93,29 @@
 
     <ion-content>
       <ion-list>
-        @if (comments.length === 0) {
-          <ion-item>
-            <ion-label>
-              <p>No comments yet. Be the first to comment!</p>
-            </ion-label>
-          </ion-item>
-        } @else {
-          @for (comment of comments; track comment.id) {
-            <app-comment-item
-              [comment]="comment"
-              (replyClicked)="handleReply($event)"
-            >
-            </app-comment-item>
-          }
-        }
+        <ion-item *ngIf="comments.length === 0">
+          <ion-label>
+            <p>No comments yet. Be the first to comment!</p>
+          </ion-label>
+        </ion-item>
+
+        <ng-container *ngIf="comments.length > 0">
+          <app-comment-item
+            *ngFor="let comment of comments"
+            [comment]="comment"
+            (replyClicked)="handleReply($event)"
+          ></app-comment-item>
+        </ng-container>
       </ion-list>
     </ion-content>
 
     <ion-footer>
-      @if (replyingTo) {
-        <ion-item class="reply-indicator" lines="none">
-          <ion-chip color="primary">
-            <ion-label>Replying to {{ replyingTo.username }}</ion-label>
-            <ion-icon (click)="cancelReply()" name="close"></ion-icon>
-          </ion-chip>
-        </ion-item>
-      }
+      <ion-item class="reply-indicator" *ngIf="replyingTo" lines="none">
+        <ion-chip color="primary">
+          <ion-label>Replying to {{ replyingTo.username }}</ion-label>
+          <ion-icon (click)="cancelReply()" name="close"></ion-icon>
+        </ion-chip>
+      </ion-item>
       <ion-toolbar>
         <ion-item lines="none">
           <ion-input

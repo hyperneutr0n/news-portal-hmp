@@ -60,9 +60,9 @@
                 ></ion-input-password-toggle>
               </ion-input>
             </ion-item>
-            @if (errorMessage) {
-              <ion-text color="danger">{{ errorMessage }}</ion-text>
-            }
+            <ion-text **ngIf="errorMessage" color="danger">
+              {{ errorMessage }}
+            </ion-text>
             <br />
             <ion-button
               [disabled]="loginForm.invalid"
