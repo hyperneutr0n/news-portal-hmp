@@ -22,10 +22,6 @@ export class AuthService {
     return !!this.storageService.getItem(this.currentUserKey);
   }
 
-  isLoggedIn$(): Observable<boolean> {
-    return this.loggedIn.asObservable();
-  }
-
   getCurrentUser(): User | null {
     return this.storageService.getItem(this.currentUserKey);
   }
