@@ -30,12 +30,12 @@ export class CommentService {
     }
   }
 
-  getCommentForNews(newsId: number): DisplayComment[] {
+  getCommentForNews(newsId: number): [number, DisplayComment[]] {
     const filteredComments = this.comments.filter(
       (comment) => comment.newsId === newsId,
     );
-
-    return this.transformToNestedComments(filteredComments);
+    const count = filteredComments.length
+    return [count, this.transformToNestedComments(filteredComments)];
   }
 
   private transformToNestedComments(comments: Comment[]): DisplayComment[] {

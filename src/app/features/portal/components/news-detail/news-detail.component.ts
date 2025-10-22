@@ -26,6 +26,7 @@ export class NewsDetailComponent implements OnInit {
   news: NewsContent = {} as NewsContent;
   newsId: number = 0;
   comments: DisplayComment[] = [];
+  commentCount: number = 0;
   newCommentText: string = '';
   replyingTo: DisplayComment | null = null;
   isCommentsModalOpen: boolean = false;
@@ -78,7 +79,7 @@ export class NewsDetailComponent implements OnInit {
   }
 
   private loadComments(newsId: number) {
-    this.comments = this.commentService.getCommentForNews(newsId);
+    [this.commentCount, this.comments] = this.commentService.getCommentForNews(newsId);
   }
 
   private loadRating(newsId: number) {
